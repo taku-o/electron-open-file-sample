@@ -1,3 +1,6 @@
 "use strict";
-var f = document.getElementById('ffld');
-f.value = require('electron').remote.getGlobal('filePath');
+var ipcRenderer = require('electron').ipcRenderer;
+ipcRenderer().on('filePath', (event, filePath) => {
+    var f = document.getElementById('ffld');
+    f.value = filePath;
+});

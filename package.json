@@ -12,7 +12,7 @@
     "less": "gulp less",
     "lint": "gulp lint",
     "format": "gulp format",
-    "package": "electron-packager . electron-project-template --platform=darwin --arch=x64 --app-version=0.1.0 --electron-version=3.1.9 --overwrite --asar --extend-info=extend.plist --no-prune "
+    "package": "electron-packager . electron-project-template --platform=darwin --arch=x64 --app-version=0.1.0 --electron-version=3.1.9 --overwrite --asar --extend-info=extend.plist --no-prune --protocol-name=electron-project-template --protocol=electron-project-template "
   },
   "keywords": [
     "electron",

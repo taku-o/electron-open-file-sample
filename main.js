@@ -1,6 +1,7 @@
 "use strict";
 const { app, BrowserWindow } = require('electron');
 let mainWindow;
+let gFilePath;
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
@@ -10,16 +11,13 @@ function createWindow() {
         },
     });
     mainWindow.loadFile('index.html');
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.send('filePath', gFilePath);
+    });
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
 }
-app.on('will-finish-launching', () => {
-    app.on('open-file', (event, filePath) => {
-        event.preventDefault();
-        global.filePath = filePath;
-    });
-});
 app.on('ready', createWindow);
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
@@ -30,4 +28,10 @@ app.on('activate', function () {
     if (mainWindow === null) {
         createWindow();
     }
+});
+app.on('will-finish-launching', () => {
+    app.on('open-file', (event, filePath) => {
+        event.preventDefault();
+        gFilePath = filePath;
+    });
 });

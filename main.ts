@@ -4,6 +4,7 @@ const {app, BrowserWindow} = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let gFilePath;
 
 function createWindow() {
   // Create the browser window.
@@ -18,6 +19,10 @@ function createWindow() {
   // and load the index.html of the app.
   mainWindow.loadFile('index.html');
 
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('filePath', gFilePath);
+  });
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
@@ -29,17 +34,6 @@ function createWindow() {
     mainWindow = null;
   });
 }
-
-app.on('will-finish-launching', () => {
-  app.on('open-file', (event, filePath: string) => {
-    event.preventDefault();
-
-    // TODO
-    // 渡されたfilePathを使ってなんやかんや
-    // @ts-ignore
-    global.filePath = filePath;
-  });
-});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -65,3 +59,13 @@ app.on('activate', function() {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+app.on('will-finish-launching', () => {
+  app.on('open-file', (event, filePath: string) => {
+    event.preventDefault();
+
+    // TODO
+    // 渡されたfilePathを使ってなんやかんや
+    gFilePath = filePath;
+  });
+});
+
