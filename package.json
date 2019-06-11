@@ -1,0 +1,57 @@
+{
+  "name": "electron-project-template",
+  "version": "0.1.0",
+  "description": "electron project template.",
+  "main": "main.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "tasks": "gulp --tasks-simple",
+    "clean": "git checkout -- . && git clean -fd",
+    "start": "electron .",
+    "tsc": "gulp tsc",
+    "less": "gulp less",
+    "lint": "gulp lint",
+    "format": "gulp format",
+    "package": "electron-packager . electron-project-template --platform=darwin --arch=x64 --app-version=0.1.0 --electron-version=3.1.9 --overwrite --asar --extend-info=extend.plist --no-prune "
+  },
+  "keywords": [
+    "electron",
+    "template"
+  ],
+  "versions": {
+    "electron": "3.1.9",
+    "node": "v10.2.1"
+  },
+  "homepage": "https://github.com/taku-o/electron-project-template",
+  "bugs": {
+    "url": "https://github.com/taku-o/electron-project-template/issues",
+    "email": "mail@nanasi.jp"
+  },
+  "author": "taku-o <mail@nanasi.jp> (https://nanasi.jp/)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.14.5",
+    "@types/webdriverio": "^4.13.3",
+    "@types/chai": "^4.1.7",
+    "@typescript-eslint/parser": "^1.7.0",
+    "asar": "^0.14.6",
+    "chai": "^4.2.0",
+    "devtron": "^1.4.0",
+    "electron": "^3.1.9",
+    "electron-packager": "^12.2.0",
+    "eslint": "^5.6.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-less": "^4.0.1",
+    "gulp-mocha": "^6.0.0",
+    "gulp-prettier": "^2.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^5.0.1",
+    "mocha": "^4.1.0",
+    "source-map-support": "^0.5.12",
+    "spectron": "^5.0.0",
+    "typescript": "^3.4.5"
+  }
+}
