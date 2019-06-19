@@ -3,7 +3,10 @@
 // All of the Node.js APIs are available in this process.
 
 var ipcRenderer = require('electron').ipcRenderer;
-ipcRenderer().on('filePath', (event, filePath: string) => {
-    var f: any = document.getElementById('ffld');
-    f.value = filePath;
+ipcRenderer.on('filePath', (event, filePath: string) => {
+  var f: any = document.getElementById('ffld');
+  f.value = filePath;
+  console.log('call filePath');
+  console.log(filePath);
 });
+

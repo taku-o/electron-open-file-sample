@@ -8,11 +8,14 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
+            devTools: true,
         },
     });
     mainWindow.loadFile('index.html');
     mainWindow.webContents.on('did-finish-load', () => {
-        mainWindow.webContents.send('filePath', gFilePath);
+        if (gFilePath) {
+            mainWindow.webContents.send('filePath', gFilePath);
+        }
     });
     mainWindow.on('closed', function () {
         mainWindow = null;
@@ -32,6 +35,11 @@ app.on('activate', function () {
 app.on('will-finish-launching', () => {
     app.on('open-file', (event, filePath) => {
         event.preventDefault();
-        gFilePath = filePath;
+        if (mainWindow) {
+            mainWindow.webContents.send('filePath', filePath);
+        }
+        else {
+            gFilePath = filePath;
+        }
     });
 });

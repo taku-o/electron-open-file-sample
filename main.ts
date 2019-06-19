@@ -13,6 +13,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      devTools: true,
     },
   });
 
@@ -20,7 +21,9 @@ function createWindow() {
   mainWindow.loadFile('index.html');
 
   mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.send('filePath', gFilePath);
+    if (gFilePath) {
+      mainWindow.webContents.send('filePath', gFilePath);
+    }
   });
 
   // Open the DevTools.
@@ -65,7 +68,11 @@ app.on('will-finish-launching', () => {
 
     // TODO
     // 渡されたfilePathを使ってなんやかんや
-    gFilePath = filePath;
+    if (mainWindow) {
+      mainWindow.webContents.send('filePath', filePath);
+    } else {
+      gFilePath = filePath;
+    }
   });
 });
 
