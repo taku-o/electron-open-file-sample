@@ -39,7 +39,7 @@
     "asar": "^0.14.6",
     "chai": "^4.2.0",
     "devtron": "^1.4.0",
-    "electron": "^3.1.9",
+    "electron": "^15.5.5",
     "electron-packager": "^12.2.0",
     "eslint": "^5.6.1",
     "gulp": "^3.9.1",
